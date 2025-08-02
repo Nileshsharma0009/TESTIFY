@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="registration.css">
+
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">🎓 TESTIFY</div> 
+  </header>
+  <div class="wrapper">
+    <div class="form-container">
+      <h2>Register</h2>
+      <form id="register-form">
+
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" required>
+        </div>
+
+        <div class="form-group">
+          <label for="state">State</label>
+          <select id="state" name="standard" required>
+            <option value="">Select State</option>
+            <option>Andhra Pradesh</option>
+            <option>Arunachal Pradesh</option>
+            <option>Assam</option>
+            <option>Bihar</option>
+            <option>Chhattisgarh</option>
+            <option>Goa</option>
+            <option>Gujarat</option>
+            <option>Haryana</option>
+            <option>Himachal Pradesh</option>
+            <option>Jharkhand</option>
+            <option>Karnataka</option>
+            <option>Kerala</option>
+            <option>Madhya Pradesh</option>
+            <option>Maharashtra</option>
+            <option>Manipur</option>
+            <option>Meghalaya</option>
+            <option>Mizoram</option>
+            <option>Nagaland</option>
+            <option>Odisha</option>
+            <option>Punjab</option>
+            <option>Rajasthan</option>
+            <option>Sikkim</option>
+            <option>Tamil Nadu</option>
+            <option>Telangana</option>
+            <option>Tripura</option>
+            <option>Uttar Pradesh</option>
+            <option>Uttarakhand</option>
+            <option>West Bengal</option>
+            <option>Andaman and Nicobar Islands</option>
+            <option>Chandigarh</option>
+            <option>Dadra and Nagar Haveli and Daman and Diu</option>
+            <option>Delhi</option>
+            <option>Lakshadweep</option>
+            <option>Puducherry</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="exam">Exam</label>
+          <select id="exam" name="exam" required>
+            <option value="">Select Exam</option>  
+            <!-- <option>MHTCET</option> -->
+            <option>IMUCET</option>
+            <!-- <option>SYNERGY</option>
+            <option>Anglo Eastern</option> -->
+          </select>
+        </div>
+
+        <!-- IMUCET options block - hidden initially -->
+        <div class="form-group" id="imucet-options" style="display:none;">
+          <label for="imucet-option">Select IMUCET Option</label>
+          <select id="imucet-option" name="imucetOption">
+            <option value="">Select Option</option>
+            <option value="DNS">DNS</option>
+            <option value="BSC-NS">BSC-NS</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone No</label>
+          <input type="text" id="phone" name="phone" required>
+        </div> 
+
+        <button type="submit" class="register-button">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const examSelect = document.getElementById('exam');
+    const imucetOptions = document.getElementById('imucet-options');
+    const imucetOptionSelect = document.getElementById('imucet-option');
+    const registerForm = document.getElementById('register-form');
+    const registerButton = document.querySelector('.register-button');
+
+    // Show/hide IMUCET option block based on exam selection
+    examSelect.addEventListener('change', function() {
+      if (this.value === 'IMUCET') {
+        imucetOptions.style.display = 'block';
+        imucetOptionSelect.setAttribute('required', 'required');
+      } else {
+        imucetOptions.style.display = 'none';
+        imucetOptionSelect.removeAttribute('required');
+        imucetOptionSelect.value = ''; // reset selection
+      }
+    });
+
+    // Form submission handler
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('fullname').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const state = document.getElementById('state').value;
+      const exam = examSelect.value;
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const imucetOption = imucetOptionSelect.value;
+
+      // Validate exam selected
+      if (!exam) {
+        alert('Please select an exam!');
+        return;
+      }
+
+      // If exam is IMUCET, validate an option is selected
+      if (exam === 'IMUCET' && !imucetOption) {
+        alert('Please select an IMUCET option!');
+        return;
+      }
+
+      // Prepare user data object
+      const userData = {
+        name,
+        age,
+        state,
+        exam,
+        email,
+        phone,
+      };
+
+      if (exam === 'IMUCET') {
+        userData.imucetOption = imucetOption;
+      }
+
+      // Store data in localStorage
+      localStorage.setItem('userData', JSON.stringify(userData));
+
+      // Add loading effect to button
+      registerButton.textContent = 'Redirecting...';
+      registerButton.style.background = '#ccc';
+      registerButton.disabled = true;
+
+      let redirectPage = '';
+
+      // Redirect logic based on exam and option
+      if (exam === 'IMUCET') {
+        switch(imucetOption) {
+          case 'DNS':
+            redirectPage = 'imucet-test.html';
+            break;
+          case 'BSC-NS':
+            redirectPage =  'imucet-test.html';
+            break;
+          case 'Others':
+            redirectPage =  'imucet-test.html';
+            break;
+          default:
+            redirectPage = 'imucet-test.html';
+        }
+      } else {
+        switch(exam) {
+        
+          case 'SYNERGY':
+            redirectPage = 'synergy-test.html';
+            break;
+          case 'Anglo Eastern':
+            redirectPage = 'anglo-eastern-test.html';
+            break;
+          default:
+            redirectPage = 'testpage.html';
+        }
+      }
+
+      setTimeout(() => {
+        window.location.href = redirectPage;
+      }, 500);
+
+    });
+  </script>
+
+  <script src="testpage.js"></script>
+</body>
+</html>
