@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMUCET Mock Test</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">🎓 TESTIFY</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Practice</a></li>
+        <li><a href="#">Results</a></li>
+        <li><a href="#">Help</a></li>
+       
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+  <h1>
+  Ace Your 
+  <span class="typewriter" id="typewriter"></span> 
+  
+</h1>
+
+
+    <p>Strengthen core concepts and boost performance with targeted study resources                    -Nilesh.</p>
+    <div class="hero-buttons">
+      <a href="registration.html" class="btn-primary">Register</a>
+          
+
+    
+    </div>
+  </section>
+
+
+  <script>
+const words = ["DREAM", "IMUCET", ];  //"SYNERGY", "ANGLO "
+let wordIndex = 0;
+let letterIndex = 0;
+let typing = true;
+const typewriter = document.getElementById("typewriter");
+
+function playTypewriter() {
+  const word = words[wordIndex];
+  if (typing) {
+    typewriter.innerHTML = word.slice(0, letterIndex + 1) + '<span class="cursor"></span>';
+    letterIndex++;
+    if (letterIndex < word.length) {
+      setTimeout(playTypewriter, 100);
+    } else {
+      typing = false;
+      setTimeout(playTypewriter, 1_000);
+    }
+  } else {
+    typewriter.innerHTML = word.slice(0, letterIndex) + '<span class="cursor"></span>';
+    letterIndex--;
+    if (letterIndex >= 0) {
+      setTimeout(playTypewriter, 50);
+    } else {
+      typing = true;
+      wordIndex = (wordIndex + 1) % words.length;
+      setTimeout(playTypewriter, 300);
+    }
+  }
+}
+
+window.onload = playTypewriter;
+</script>
+
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="icon">⏱️</div>
+      <h3>180-Minute Tests</h3>
+      <p>Full-length mock tests with proper time tracking.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🎓</div>
+      <h3>200 Questions</h3>
+      <p>Structured papers with real-exam difficulty levels.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📊</div>
+      <h3>Progress Tracking</h3>
+      <p>Review stats and boost your accuracy.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🏆</div>
+      <h3>Instant Results</h3>
+      <p>Get detailed analysis immediately after completion.</p>
+    </div>
+  </section>
+
+  <!-- Registration Form -->
+  <div id="registrationSection" class="hidden">
+    <h2>Register</h2>
+    <form id="registrationForm">
+      <input type="email" id="regEmail" placeholder="Email" required /><br>
+      <input type="password" id="regPassword" placeholder="Password" required /><br>
+      <button type="submit">Register</button>
+    </form>
+    <div id="regMsg"></div>
+  </div>
+
+  <!-- Login Form -->
+  <div id="loginSection" class="hidden">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required /><br>
+      <input type="password" id="loginPassword" placeholder="Password" required /><br>
+      <button type="submit" id="loginBtn" disabled>Login to Continue</button>
+    </form>
+    <div id="loginMsg"></div>
+  </div>
+
+  <!-- Next Page Section -->
+  <div id="nextPageSection" class="hidden">
+    <h2>Welcome! You have logged in successfully.</h2>
+  </div>
+
+  <!-- <script>
+    // Show registration form
+    document.getElementById('continueBtn').onclick = function () {
+      document.getElementById('registrationSection').classList.remove('hidden');
+      document.getElementById('loginSection').classList.add('hidden');
+    };
+
+    // Show login form
+    document.getElementById('showLoginBtn').onclick = function () {
+      document.getElementById('loginSection').classList.remove('hidden');
+      document.getElementById('registrationSection').classList.add('hidden');
+    };
+
+    // Registration logic
+    document.getElementById('registrationForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value.trim();
+
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userPassword', password);
+
+      document.getElementById('regMsg').textContent = "Registration successful! Please login.";
+      setTimeout(() => {
+        document.getElementById('registrationSection').classList.add('hidden');
+        document.getElementById('loginSection').classList.remove('hidden');
+      }, 1000);
+    });
+
+    // Enable login button when fields are filled
+    document.getElementById('loginForm').addEventListener('input', function () {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      document.getElementById('loginBtn').disabled = !(email && password);
+    });
+
+    // Login logic
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      const storedEmail = localStorage.getItem('userEmail');
+      const storedPassword = localStorage.getItem('userPassword');
+
+      if (email === storedEmail && password === storedPassword) {
+        document.getElementById('loginMsg').textContent = "Login successful!";
+        setTimeout(() => {
+          document.getElementById('loginSection').classList.add('hidden');
+          document.getElementById('nextPageSection').classList.remove('hidden');
+        }, 1000);
+      } else {
+        document.getElementById('loginMsg').textContent = "Invalid email or password.";
+      }
+    });
+  </script> -->
+</body>
+</html> 
+
+<script>scr ="index.js"</script>

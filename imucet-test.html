@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MHTCET Mock Tests - Testify</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="imucet-test.css" />
+ 
+</head>
+<body>
+  <div class="progress-indicator" id="progressBar"></div>
+  <div class="particles" id="particles"></div>
+
+  <header class="navbar">
+    <div id="logo">🎓 TESTIFY</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Practice</a></li>
+        <li><a href="#">Results</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="test-list-section">
+    <h1 class="section-title">🚀 Step towards success</h1>
+    <p class="tagline">Challenge yourself with full-length tests & boost your MHTCET preparation!</p> 
+
+    <div class="test-grid">
+      <div class="test-card card1">
+        <h2>📝 Mock Test 1</h2>
+        <p>Full syllabus coverage | 180 minutes | 200 questions</p>
+        <button onclick="startTest(1, event)">Start Test</button>
+      </div>
+
+      <div class="test-card card2">
+        <h2>📚 Mock Test 2</h2>
+        <p>Full syllabus coverage | 180 minutes | 200 questions</p>
+        <button onclick="startTest(2, event)">Start Test</button>
+      </div>
+
+      <div class="test-card card3">
+        <h2>🔬 Mock Test 3</h2>
+        <p>Full syllabus coverage | 180 minutes | 200 questions</p>
+        <button onclick="startTest(3, event)">Start Test</button>
+      </div>
+
+      <div class="test-card card4">
+        <h2>🧠 Mock Test 4</h2>
+        <p>Full syllabus coverage | 180 minutes | 200 questions</p>
+        <button onclick="startTest(4, event)">Start Test</button>
+      </div>
+
+      <div class="test-card card5">
+        <h2>💡 Mock Test 5</h2>
+        <p>Full syllabus coverage | 180 minutes | 200 questions</p>
+        <button onclick="startTest(5, event)">Start Test</button>
+      </div>
+
+      <div class="test-card card6">
+        <h2>⚡ Mock Test 6</h2>
+        <p>Full syllabus coverage | 180 minutes | 200 questions</p>
+        <button onclick="startTest(6, event)">Start Test</button>
+      </div>
+    </div> 
+  </section> 
+
+  <script>
+    // Unified startTest function to save mock test name, animate button and redirect
+    function startTest(testNumber, event) {
+      if (event) event.preventDefault();
+
+      // Array of mock test names (extend if you add more tests)
+      const mockNames = [
+        "Mock Test 1",
+        "Mock Test 2",
+        "Mock Test 3",
+        "Mock Test 4",
+        "Mock Test 5",
+        "Mock Test 6"
+      ];
+
+      // Save test name to localStorage
+      const nameToSave = mockNames[testNumber - 1] || `Mock Test ${testNumber}`;
+      localStorage.setItem('mockTestName', nameToSave);
+
+      // Animate button
+      const button = event ? event.target : null;
+      if (button) {
+        const originalText = button.textContent;
+        button.textContent = 'Loading...';
+        button.style.background = '#ccc';
+        button.disabled = true;
+
+        // Redirect to next page after short delay - update URL as required
+        setTimeout(() => {
+          // Redirect URL example; modify if your test page URL is different
+          window.location.href = `testpage.html?mock=${testNumber}`;
+        }, 500);
+      } else {
+        // Fallback redirect if event/button is missing
+        window.location.href = `testpage.html?mock=${testNumber}`;
+      }
+
+      console.log("Mock Test name saved:", nameToSave);
+    }
+
+
+    // Floating particles effect (your existing code)
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 20;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Progress bar animation on scroll (existing code)
+    function updateProgressBar() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.getElementById('progressBar').style.width = scrollPercent + '%';
+    }
+
+    // Initialize on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+
+      // Scroll event for progress bar
+      window.addEventListener('scroll', updateProgressBar);
+
+      // Button hover effect
+      const buttons = document.querySelectorAll('.test-card button');
+      buttons.forEach(button => {
+        button.addEventListener('mouseenter', () => {
+          button.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+        button.addEventListener('mouseleave', () => {
+          button.style.transform = 'translateY(0) scale(1)';
+        });
+
+        // Ripple effect on click
+        button.addEventListener('click', (e) => {
+          const ripple = document.createElement('span');
+          const rect = button.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          ripple.classList.add('ripple');
+
+          button.appendChild(ripple);
+
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+    });
+  </script> 
+
+</body>
+</html>
+
+<script src="imucet-test.js"></script>

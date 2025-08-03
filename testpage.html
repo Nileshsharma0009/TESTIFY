@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TESTIFY Mock Dashboard</title>
+  <link rel="stylesheet" href="testpage.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="hamburger" onclick="toggleSidebar()">☰</div>
+    <div class="logo">🎓 TESTIFY </div>
+
+    <div class="section-buttons">
+      <button onclick="changeSection('A'); showPopupMessage('Section A Selected')"> A</button>
+      <button onclick="changeSection('B'); showPopupMessage('Section B Selected')"> B</button> 
+       <button id="darkModeToggle">🌙 </button>
+       <button id="fullscreenToggle" onclick="toggleFullScreen()"> 
+
+
+        <div class="header-right">
+<!--   <div id="timer">180:00</div>
+  <button id="fullscreenToggle" onclick="toggleFullScreen()">Enter Fullscreen</button>
+</div> -->
+
+  Enter Fullscreen
+</button>
+    </div>
+    <div id="timer">180:00</div>
+  </header> 
+
+
+   <button class="stats-toggle" onclick="toggleStatsBar()" id="statsToggleBtn">📊</button> 
+
+  
+
+  <!-- <script>
+    let timer;
+let totalSeconds = 180* 60; // For example, 1 hour (3600 seconds)
+
+function startTimer() {
+  timer = setInterval(() => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    document.getElementById("timer").textContent = 
+      `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+    totalSeconds--;
+
+    if (totalSeconds < 0) {
+      clearInterval(timer);
+      alert("⏰ Time's up! Submitting your test.");
+      submitTest(); // ✅ Automatically submit when timer reaches zero
+    }
+  }, 1000);
+}
+
+  </script> -->
+
+
+  <!-- Sidebar (left) -->
+  <nav id="sidebar" class="sidebar hidden">
+    <button onclick="navigate('profile')">👤 Profile</button>
+    <button onclick="navigate('test1')">🧪 MHTCET 24 Shift - 1</button>
+    <button onclick="navigate('test2')">🧪 MHTCET 24 Shift - 2</button>
+    <button onclick="navigate('test3')">🧪 MHTCET 24 Shift - 3</button>
+    <button onclick="navigate('test4')">🧪 MHTCET 24 Shift - 4</button>
+    <button onclick="navigate('test5')">🧪 MHTCET 24 Shift - 5</button>
+  </nav>
+
+
+  <!-- Section A Statistics Sidebar -->
+<nav id="statsSidebarA" class="stats-sidebar hidden">
+  <h3>📊 <strong>SECTION A</strong></h3>
+  <div id="questionStatsA" class="question-stats-grid"></div>
+</nav>
+ 
+
+<!-- Section B Statistics Sidebar -->
+<nav id="statsSidebarB" class="stats-sidebar hidden">
+  <h3>📊 <strong>SECTION B</strong></h3>
+  <div id="questionStatsB" class="question-stats-grid"></div>
+
+</nav>
+
+
+  <main>
+    <section class="container">
+      <aside id="questionNav" class="question-nav"></aside>
+      <section id="questionsPanel" class="question-panel"></section>
+    </section>
+  </main>
+
+  
+
+<div class="question-controls">
+    <button onclick="markForReview()" class="control-btn">Mark for Review</button>
+         <button onclick="goBackward()" class="control-btn"> backward</button>  
+  <button onclick="markAnswered()" class="control-btn"> Save & Next</button>
+  <button onclick="markSkipped()" class="control-btn"> forward</button>
+
+ 
+
+   
+</div> 
+
+
+<!-- ✅ New submit button container -->
+<div class="submit-container">
+  <button class="submit-btn" onclick="submitTest()">Submit</button>
+</div>
+
+
+
+
+
+<script>
+  function toggleFullScreen() {
+  const btn = document.getElementById("fullscreenToggle");
+
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen()
+      .then(() => {
+        btn.textContent = "Exit Fullscreen";
+      })
+      .catch((err) => {
+        console.error("Error entering fullscreen:", err);
+        alert("Fullscreen mode couldn't be enabled. Please click the button.");
+      });
+  } else {
+    document.exitFullscreen()
+      .then(() => {
+        btn.textContent = "Enter Fullscreen";
+      })
+      .catch((err) => {
+        console.error("Error exiting fullscreen:", err);
+        alert("Couldn't exit fullscreen.");
+      });
+  }
+}
+
+</script> 
+
+<!-- 
+ <script>
+  window.onload = () => {
+  startFullScreenLock(); // auto enter fullscreen
+  // startTimer(); etc.
+};
+
+ </script> -->
+
+  
+</body>
+<script src="testpage.js"></script>
+
+</html>
