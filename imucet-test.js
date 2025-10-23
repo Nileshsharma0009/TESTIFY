@@ -1,6 +1,6 @@
 const mockUnlockTimes = [
   new Date('2025-08-02T11:00:00+05:30'),
-  new Date('2025-10-23T11:00+05:30'),
+  new Date('2025-10-23T10:00:00+05:30'),
   new Date('2026-02-11T11:00:00+05:30'),
   new Date('2026-03-15T11:00:00+05:30'),
   new Date('2026-04-19T11:00:00+05:30'),
@@ -44,3 +44,4 @@ document.addEventListener('DOMContentLoaded', () => {
   updateUnlockButtons();
   setInterval(updateUnlockButtons, 30000); // update every 30 seconds for auto unlock
 });
+
