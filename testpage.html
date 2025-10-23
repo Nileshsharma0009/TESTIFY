@@ -9,7 +9,7 @@
 <body oncontextmenu="return false">
   <header class="header">
     <div class="hamburger" onclick="toggleSidebar()">☰</div>
-    <div class="logo">🎓 TESTIFY </div>
+    <div class="logo">🎓 IMU-MOCK </div>
 
     <div class="section-buttons">
       <button onclick="changeSection('A'); showPopupMessage('Section A Selected')"> A</button>
@@ -19,9 +19,7 @@
 
 
         <div class="header-right">
-<!--   <div id="timer">180:00</div>
-  <button id="fullscreenToggle" onclick="toggleFullScreen()">Enter Fullscreen</button>
-</div> -->
+
 
   Enter Fullscreen
 </button>
@@ -33,31 +31,6 @@
    <button class="stats-toggle" onclick="toggleStatsBar()" id="statsToggleBtn">📊</button> 
 
   
-
-  <!-- <script>
-    let timer;
-let totalSeconds = 180* 60; // For example, 1 hour (3600 seconds)
-
-function startTimer() {
-  timer = setInterval(() => {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-
-    document.getElementById("timer").textContent = 
-      `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-    totalSeconds--;
-
-    if (totalSeconds < 0) {
-      clearInterval(timer);
-      alert("⏰ Time's up! Submitting your test.");
-      submitTest(); // ✅ Automatically submit when timer reaches zero
-    }
-  }, 1000);
-}
-
-  </script> -->
 
 
   <!-- Sidebar (left) -->
@@ -141,20 +114,42 @@ function startTimer() {
   }
 }
 
-</script> 
+<script>
+        // 1. Disable the Right-Click Context Menu
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+            // Optional: You can display an alert here, but it can be annoying.
+            // alert("Right-click is disabled.");
+        });
 
-<!-- 
- <script>
-  window.onload = () => {
-  startFullScreenLock(); // auto enter fullscreen
-  // startTimer(); etc.
-};
+        // 2. Disable Keyboard Shortcuts
+        document.onkeydown = function(e) {
 
- </script> -->
+            // Block F12 key (Key Code 123)
+            if (e.keyCode === 123) {
+                return false;
+            }
+
+            // Block Ctrl+Shift+I (Inspect Element, Key Code 73)
+            // Block Ctrl+Shift+J (Console, Key Code 74)
+            // Block Ctrl+Shift+C (Inspect Element, Key Code 67)
+            if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+                return false;
+            }
+
+            // Block Ctrl+U (View Page Source, Key Code 85)
+            if (e.ctrlKey && e.keyCode === 85) {
+                return false;
+            }
+        };
+    </script>
+
+
 
   
 </body>
 <script src="testpage.js"></script>
 
 </html>
+
 
